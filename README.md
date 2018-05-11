@@ -9,3 +9,4 @@ The software uses pyOpengl and glfw to be able to graph 3D ecuations.
 </ul>
 
 ![image](https://imgur.com/SogqS0F)
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/68hnYqw"><a href="//imgur.com/68hnYqw"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
