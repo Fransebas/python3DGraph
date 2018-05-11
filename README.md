@@ -8,4 +8,4 @@ The software uses pyOpengl and glfw to be able to graph 3D ecuations.
   <li> Parametric functions of the form f(t) = <g(t), h(t), p(t)> </li>
 </ul>
 
-![alt text](https://imgur.com/a/68hnYqw)
+![image](https://imgur.com/a/68hnYqw)
