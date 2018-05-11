@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d013746d-48d9-462b-a209-9691ecdf442d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Axis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Drawable.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Expression.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Face.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parametric.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shaders/fragmentAxis.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shaders/fragmentAxis.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shaders/fragmentParametric.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shaders/fragmentParametric.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EBOGL.py" beforeDir="false" afterPath="$PROJECT_DIR$/EBOGL.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shaders.py" beforeDir="false" afterPath="$PROJECT_DIR$/Shaders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Texture.py" beforeDir="false" afterPath="$PROJECT_DIR$/Texture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VBOGL.py" beforeDir="false" afterPath="$PROJECT_DIR$/VBOGL.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function.py" beforeDir="false" afterPath="$PROJECT_DIR$/function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pygl.py" beforeDir="false" afterPath="$PROJECT_DIR$/pygl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shaders/fragment.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shaders/fragment.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shaders/fragment.vert" beforeDir="false" afterPath="$PROJECT_DIR$/shaders/fragment.vert" afterDir="false" />
-    </list>
+    <list default="true" id="d013746d-48d9-462b-a209-9691ecdf442d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

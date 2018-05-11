@@ -5,8 +5,7 @@ The software uses pyOpengl and glfw to be able to graph 3D ecuations.
 <h2> Supported graphs </h2>
 <ul>
   <li> Tow variable function of the form z = f(x,y) </li>
-  <li> Parametric functions of the form f(t) = <g(t), h(t), p(t)> </li>
+  <li> Parametric functions of the form f(t) = [ g(t), h(t), p(t) ]</li>
 </ul>
 
 ![image](https://imgur.com/SogqS0F)
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/68hnYqw"><a href="//imgur.com/68hnYqw"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
