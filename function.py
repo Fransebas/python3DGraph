@@ -71,7 +71,6 @@ class Function(Drawable):
 
 
     def draw(self):
-        super().__generateMatrix__()
         if self.shader:
             self.shader.use()
             super().writeMatrixs(self.shader)

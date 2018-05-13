@@ -30,7 +30,6 @@ class Parametric(Drawable):
 
 
     def draw(self):
-        self.__generateMatrix__()
         if self.shader:
             self.shader.use()
             super().writeMatrixs(self.shader)

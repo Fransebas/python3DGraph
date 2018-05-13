@@ -8,6 +8,16 @@ from Shaders import *
 import time
 import glfw
 import Axis
+import Vector
+import VectorField
+
+import Geometry.Cone
+
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtGui import QIcon
+
+from Camera import Camera
 
 from OpenGL.GL import *
 import math
@@ -21,13 +31,35 @@ def tanF(x,y):
 def pf2(t):
     return [t,t**2,0]
 
+def vf(x,y,z):
+    return [y+2*z, x-z, 2*x-y]
 
 def pf(t):
-    a = 3
-    b = 1
-    return [ a*( math.cos(t)) + b*math.cos(t*15), b*math.sin(t*15), a*math.sin(t) ]
+    q = 7
+    p = 3
+    u = 25*t
+    return [math.cos(t) * (q + p * math.cos(u)), p * math.sin(u), math.sin(t) * (q + p * math.cos(u))]
+    #return [ c*( math.cos(t)) + a*math.cos(t*15), c*math.sin(t*15), c*math.sin(t) ]
 
-class Window():
+
+class Window(QWidget):
+
+    def __init__(self):
+        super().__init__()
+        self.title = 'PyQt5 simple window - pythonspot.com'
+        self.left = 10
+        self.top = 10
+        self.width = 640
+        self.height = 480
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.left, self.top, self.width, self.height)
+        self.show()
+
+
+class openGL():
 
     def __init__(self):
 
@@ -47,6 +79,8 @@ class Window():
         self.x = 0
         self.y = 0
 
+        self.camera = Camera()
+
         self.isClick = False
 
         glEnable(GL_DEPTH_TEST)
@@ -60,11 +94,13 @@ class Window():
         glLineWidth(1)
 
     def initElements(self):
-        self.drawingElements.append(function.Function(fxy, self.shader))
-        self.drawingElements.append(function.Function(tanF, self.shader))
+        #self.drawingElements.append(function.Function(fxy, self.shader))
+        #self.drawingElements.append(function.Function(tanF, self.shader))
         self.drawingElements.append(Parametric.Parametric(pf, (0, 2 * 3.1416), 400))
         self.drawingElements.append(Axis.Axis())
-        self.drawingElements.append(Parametric.Parametric(pf2, (-5,5), 25))
+        self.drawingElements.append(VectorField.VectorField(vf))
+        #self.drawingElements.append(Vector.Vector([-2,3,4], start=[1,1,1]))
+        #self.drawingElements.append(Parametric.Parametric(pf2, (-5,5), 25))
 
     def initWindos(self):
 
@@ -89,6 +125,7 @@ class Window():
         glfw.set_cursor_pos_callback(self.window, self.cursor)
         glfw.set_mouse_button_callback(self.window, self.cursorClick)
 
+
     def cursorClick(self, window, button, action, mods):
 
         if button == glfw.MOUSE_BUTTON_LEFT:
@@ -106,10 +143,6 @@ class Window():
             self.dx = self.x - x
             self.dy = self.y - y
 
-
-            print("(x,y)", (x,y))
-            print("(dx,dy)", (self.dx, self.dy))
-
         self.x = x
         self.y = y
 
@@ -123,10 +156,15 @@ class Window():
 
             t1 = time.time()
 
+            self.camera.rotBeta(min(self.dt * self.dx, 0.05))
+            self.camera.rotAalpha(min(self.dt * self.dy, 0.05))
+
             for e in self.drawingElements:
+                e.setV(self.camera.getV())
                 e.draw()
-                e.rotBeta(min(self.dt * self.dx, 0.05) )
-                e.rotAalpha(min(self.dt * self.dy, 0.05) )
+                #e.rotBeta(min(self.dt * self.dx, 0.05) )
+                #e.rotAalpha(min(self.dt * self.dy, 0.05) )
+
 
 
             #finally:
@@ -141,5 +179,14 @@ class Window():
 
 
 if __name__ == "__main__":
+    gl = openGL()
+    #
+
+    app = QApplication(sys.argv)
+
     window = Window()
-    window.Render()
+
+    gl.Render()
+
+    sys.exit(app.exec_())
+

@@ -10,5 +10,8 @@ uniform float scale = 5.0;
 
 void main()
 {
-        gl_Position = P * V * M * vec4(position, scale);
+        vec4 pos =  M * vec4(position, 1.0);
+        pos[3] = scale;
+        gl_Position = P * V * pos;
+        //gl_Position[3] = scale;
 }
