@@ -1,21 +1,25 @@
 from VBOGL import *
 from Drawable import *
 from Shaders import  *
+from Function import *
 
 class Parametric(Drawable):
 
-    def __init__(self, f, interval, steps):
+    def __init__(self, strf, interval, steps):
         super().__init__()
         self.shader = Shader()
         self.shader.addFragment("shaders/fragmentParametric.frag")
         self.shader.addVertex("shaders/fragmentParametric.vert")
         self.shader.compile()
-        self.f = f
+        self.f = Function(strf, type=Function.Types.PARAMETRIC)
         self.interval = interval
         self.steps = steps
         self.vertex = []
 
         self.__build__()
+
+    def getFunction(self):
+        return self.f
 
     def __build__(self):
 
@@ -23,7 +27,7 @@ class Parametric(Drawable):
 
 
         for i in range(self.steps):
-            self.vertex.append(self.f(i * self.d + self.interval[0]))
+            self.vertex.append(self.f.eval(i * self.d + self.interval[0]))
 
 
         self.vbo = VBOGL(self.vertex, GL_LINE_STRIP)

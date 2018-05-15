@@ -18,10 +18,10 @@ class Drawable():
         self.xyz[0] = x
 
     def setY(self, y):
-        self.xyz[0] = y
+        self.xyz[1] = y
 
     def setZ(self, z):
-        self.xyz[0] = z
+        self.xyz[2] = z
 
     def setRotation(self, abg):
         self.abg = abg
@@ -58,7 +58,7 @@ class Drawable():
     def __generateMatrix__(self):
         self.M = glm.mat4(1.0)
 
-        self.M = glm.translate(self.M, glm.vec3(self.xyz[0], self.xyz[1], self.xyz[2]))
+        self.M = glm.translate(self.M, glm.vec3(float(self.xyz[0]), float(self.xyz[1]), float(self.xyz[2])))
 
         self.M = glm.rotate(self.M, self.abg[0], glm.vec3(1, 0, 0))
         self.M = glm.rotate(self.M, self.abg[1], glm.vec3(0, 1, 0))

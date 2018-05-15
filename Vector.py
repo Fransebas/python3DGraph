@@ -7,8 +7,8 @@ class Vector(Drawable):
     def __init__(self, end, start = [0,0,0]):
         super().__init__()
 
-        self.end = end
-        self.start = start
+        self.end = np.array(end, dtype=np.float32)
+        self.start = np.array(start, dtype=np.float32)
         self.vertex = [self.start, self.end]
         self.cone = Cone(0.3, 0.1, 12)
         self.shader = self.cone.shader
@@ -53,8 +53,8 @@ class Vector(Drawable):
         self.vbo = VBOGL.VBOGL(self.vertex,GL_LINES)
         self.cone.setXYZ(self.end)
 
-        s = np.array(self.start)
-        e = np.array(self.end)
+        s = self.start
+        e = self.end
         v = e - s
 
         if not np.all(np.abs(v) > 0.001):

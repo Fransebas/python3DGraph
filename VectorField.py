@@ -3,6 +3,8 @@ from enum import Enum
 
 from Drawable import *
 
+from Function import *
+
 class VectorField(Drawable):
 
     class Types(Enum):
@@ -10,9 +12,9 @@ class VectorField(Drawable):
         SIZED = 2
 
 
-    def __init__(self, f, type = Types.SIZED):
+    def __init__(self, strf, type = Types.SIZED):
         super().__init__()
-        self.f = f
+        self.f = Function(strf, type=Function.Types.VECTOR)
         self.type = type
         self.vectors = []
         self.xRange = 5
@@ -37,8 +39,11 @@ class VectorField(Drawable):
                     x = scaleX*i - scaleX*self.xRange/2.0
                     y = scaleY*j - scaleY*self.yRange/2.0
                     z = scaleZ*k - scaleZ*self.zRange/2.0
-                    end = self.f(x,y,z)
+                    end = self.f.eval(x,y,z)
                     self.vectors.append(Vector(start=[x,y,z], end=end))
+
+    def getFunction(self):
+        return self.f
 
     def setXYZ(self,xyz):
         super().setXYZ(xyz)

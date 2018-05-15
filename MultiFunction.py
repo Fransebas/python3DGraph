@@ -4,16 +4,23 @@ from OpenGL.GL import *
 from Texture import *
 from Face import *
 from Drawable import  *
+from Function import *
+from Shaders import *
 
 
-class Function(Drawable):
+class MultiFunction(Drawable):
 
-    def __init__(self, f, shader):
+    def __init__(self, strf):
         super().__init__()
         self.scale = 5
         self.ebo = None
-        self.shader = shader
-        self.f = f
+
+        self.shader = Shader()
+        self.shader.addFragment("shaders/fragment.frag")
+        self.shader.addVertex("shaders/fragment.vert")
+        self.shader.compile()
+
+        self.f = Function(strf, type=Function.Types.MULT_FUNC)
         self.points = []
         self.indexs = []
         self.coords = []
@@ -26,6 +33,9 @@ class Function(Drawable):
 
         self.__build__()
 
+    def getFunction(self):
+        return self.f
+
 
     def __build__(self):
         scaleX = self.scale/self.xRange
@@ -37,7 +47,7 @@ class Function(Drawable):
             for j in range(0, self.yRange):
                 x = scaleX*i - scaleX*self.xRange/2.0
                 z = scaleZ*j - scaleZ*self.yRange/2.0
-                y = self.f(x, z)
+                y = self.f.eval(x, z)
                 self.points.append((x,y,z))
 
                 self.coords.append([ i*0.5, j*0.5])
