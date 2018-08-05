@@ -15,6 +15,9 @@ It currently support python3
 
 * install : `pip3 install sympy` reference : [pip installation of sympy](https://pypi.org/project/sympy/), site [Sympy](http://www.sympy.org/en/index.html)
 
+Usefull oneliner
+`pip3 install PyOpenGL PyOpenGL_accelerate pyqt5 PyGLM Pillow sympy`
+
 
 
 <h2> Supported graphs </h2>
