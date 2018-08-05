@@ -2,6 +2,12 @@
 
 The software uses pyOpengl and glfw to be able to graph 3D ecuations.
 
+<h1> Dependencies </h1>
+It currently support python3
+<ul>
+  <li> pip3 install PyOpenGL PyOpenGL_accelerate</li>
+</ul>
+
 <h2> Supported graphs </h2>
 <ul>
   <li> Tow variable function of the form z = f(x,y) </li>
