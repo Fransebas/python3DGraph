@@ -9,6 +9,8 @@ It currently support python3
 
 * install : `pip3 install pyqt5` reference : [pyqt5](http://pyqt.sourceforge.net/Docs/PyQt5/installation.html)
 
+* install : `pip install PyGLM` reference : [glm](https://pypi.org/project/PyGLM/)
+
 <h2> Supported graphs </h2>
 <ul>
   <li> Tow variable function of the form z = f(x,y) </li>
