@@ -21,7 +21,7 @@ It currently support python3
 * install : `pip install numpy` reference : [pip installation of numpy](https://pypi.org/project/numpy/), site [numpy](http://www.numpy.org)
 
 Useful one-liner
-`pip3 install PyOpenGL PyOpenGL_accelerate pyqt5 PyGLM Pillow sympy`
+`pip3 install PyOpenGL PyOpenGL_accelerate pyqt5 PyGLM Pillow sympy numpy`
 
 ### OpenGL
 
