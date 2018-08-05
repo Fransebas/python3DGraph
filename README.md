@@ -4,9 +4,10 @@ The software uses pyOpengl and glfw to be able to graph 3D ecuations.
 
 <h1> Dependencies </h1>
 It currently support python3
-<ul>
-  <li> pip3 install PyOpenGL PyOpenGL_accelerate</li>
-</ul>
+
+* install : `pip3 install PyOpenGL PyOpenGL_accelerate`  reference : [PyOpengl](http://pyopengl.sourceforge.net/documentation/installation.html)
+
+* install : `pip3 install pyqt5` reference : [pyqt5](http://pyqt.sourceforge.net/Docs/PyQt5/installation.html)
 
 <h2> Supported graphs </h2>
 <ul>
