@@ -1,4 +1,4 @@
-<h1> 3D Graphing calculator </h1>
+<h1> Graphy - 3D Graphing calculator </h1>
 
 The software uses pyOpengl and glfw to be able to graph 3D ecuations.
 
