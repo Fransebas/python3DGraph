@@ -13,6 +13,9 @@ It currently support python3
 
 * install : `pip3 install Pillow` reference : [PIL / Pillow](https://pillow.readthedocs.io/en/latest/installation.html)
 
+* install : `pip3 install sympy` reference : [pip installation of sympy](https://pypi.org/project/sympy/), site [Sympy](http://www.sympy.org/en/index.html)
+
+
 
 <h2> Supported graphs </h2>
 <ul>
