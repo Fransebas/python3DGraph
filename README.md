@@ -3,6 +3,9 @@
 The software uses pyOpengl and glfw to be able to graph 3D ecuations.
 
 <h1> Dependencies </h1>
+
+### Python
+
 It currently support python3
 
 * install : `pip3 install PyOpenGL PyOpenGL_accelerate`  reference : [PyOpengl](http://pyopengl.sourceforge.net/documentation/installation.html)
@@ -18,7 +21,9 @@ It currently support python3
 Usefull oneliner
 `pip3 install PyOpenGL PyOpenGL_accelerate pyqt5 PyGLM Pillow sympy`
 
+### OpenGL
 
+Currently the shaders are only for `#version 330` but I think It will be easy to change the shader for other versions.
 
 <h2> Supported graphs </h2>
 <ul>
