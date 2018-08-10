@@ -31,6 +31,7 @@ Currently the shaders are only for `#version 330` but I think It will be easy to
 <ul>
   <li> Tow variable function of the form z = f(x,y) </li>
   <li> Parametric functions of the form f(t) = [ g(t), h(t), p(t) ]</li>
+  <li> Vector Fields of the form f(x,y,z) = g(x,y,z)*i + h(x,y,z)*j + q(x,y,z)*k</li>
 </ul>
 
 ![image](https://i.imgur.com/7etOedx.png)
