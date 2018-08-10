@@ -8,11 +8,12 @@ from Shaders import *
 
 class Cone(Drawable):
 
-    def __init__(self, height, rad, slices):
+    def __init__(self, height, rad, slices, color=[1.0,0.0,0.0]):
         super(Cone, self).__init__()
 
+        self.color =  np.array(color, dtype=np.float)
         self.shader = Shader()
-        self.shader.addVertex("shaders/fragment.vert")
+        self.shader.addVertex("shaders/fragmentCone.vert")
         self.shader.addFragment("shaders/fragmentCone.frag")
         self.shader.compile()
 
@@ -73,5 +74,6 @@ class Cone(Drawable):
     def draw(self):
         if self.shader:
             self.shader.use()
+            self.shader.setVec3(glm.vec3(self.color[0], self.color[1], self.color[2]), 'colorVect')
             super().writeMatrixs(self.shader)
         self.ebo.draw()

@@ -26,8 +26,8 @@ class MultiFunction(Drawable):
         self.coords = []
         self.normals = []
 
-        self.xRange = 10
-        self.yRange = 10
+        self.xRange = 20
+        self.yRange = 20
 
         self.texture = Texture("Textures/texture3.png")
 

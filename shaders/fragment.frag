@@ -13,7 +13,7 @@ vec4 pixel;
 vec4 ambient = vec4(0.3, 0.3, 0.3,1);
 
 vec4 diffuse = vec4(1, 1, 1, 1);
-vec3 lightPos = vec3(0.3, 0.6, 0);
+in vec3 lightPos;
 
 
 vec3 viewPos = vec3(0,0,-1);

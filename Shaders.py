@@ -41,4 +41,7 @@ class Shader():
         glUniformMatrix4fv(glGetUniformLocation(self.shader, str), 1, GL_FALSE, glm.value_ptr(mat))
 
     def setVec4(self, vect, str):
-        glUniform4fv(glGetUniformLocation(self.shader, str), 1, GL_FALSE, glm.value_ptr(vect))
+        glUniform4fv(glGetUniformLocation(self.shader, str), 1, glm.value_ptr(vect))
+
+    def setVec3(self, vect, str):
+        glUniform3fv(glGetUniformLocation(self.shader, str), 1, glm.value_ptr(vect))

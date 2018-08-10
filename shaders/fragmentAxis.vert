@@ -6,7 +6,7 @@ uniform mat4 M;
 uniform mat4 P;
 uniform mat4 V;
 
-uniform float scale = 5.0;
+uniform float scale = 2.0;
 
 void main()
 {

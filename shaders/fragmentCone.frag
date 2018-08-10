@@ -5,6 +5,8 @@ in vec3 vNormal;
 in vec3 FragPos;
 out vec4 outColor;
 
+in vec4 colorFrag;
+
 vec4 ambient = vec4(0.3, 0.3, 0.3,1);
 
 vec4 diffuse = vec4(1, 1, 1, 1);
@@ -33,6 +35,6 @@ vec4 getDiffuse()
 
 void main()
 {
-    outColor = (getDiffuse() + ambient + getSpecular())*vec4(1,0,0,1) + getSpecular();
+    outColor = (getDiffuse() + ambient + getSpecular())*colorFrag + getSpecular();
     //outColor = vec4(vNormal,1);
 }

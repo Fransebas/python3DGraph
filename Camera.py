@@ -10,6 +10,7 @@ class Camera():
 
     V = glm.mat4(1.0)
     abg = [0.0, 0.0, 0.0]
+    s = [1.0, 1.0, 1.0]
 
     def __init__(self):
         print ("Camera created")
@@ -37,8 +38,13 @@ class Camera():
     def rotGama(self, c):
         Camera.abg[2] += c
 
+    def setScale(self, s):
+        Camera.s = s
+
     def __generateMatrix__(self):
         Camera.V = glm.mat4(1.0)
+
+        Camera.V = glm.scale(Camera.V, glm.vec3(Camera.s[0], Camera.s[1], Camera.s[2]))
 
         Camera.V = glm.translate(Camera.V, glm.vec3(0.0, 0.0, -2.0))
 

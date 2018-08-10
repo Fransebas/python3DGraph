@@ -29,31 +29,36 @@ from Camera import Camera
 from OpenGL.GL import *
 import math
 
-def fxy(x,y):
-    return x**2 + y**2
 
-def tanF(x,y):
-    return 2*0.2*x + 2*0.3*y - fxy(0.3,0.2)
+def fxy(x, y):
+    return x ** 2 + y ** 2
+
+
+def tanF(x, y):
+    return 2 * 0.2 * x + 2 * 0.3 * y - fxy(0.3, 0.2)
+
 
 def pf2(t):
-    return [t,t**2,0]
+    return [t, t ** 2, 0]
 
-def vf(x,y,z):
-    return [y+2*z, x-z, 2*x-y]
+
+def vf(x, y, z):
+    return [y + 2 * z, x - z, 2 * x - y]
+
 
 def pf(t):
     q = 7
     p = 3
-    u = 25*t
+    u = 25 * t
     return [math.cos(t) * (q + p * math.cos(u)), p * math.sin(u), math.sin(t) * (q + p * math.cos(u))]
-    #return [ c*( math.cos(t)) + a*math.cos(t*15), c*math.sin(t*15), c*math.sin(t) ]
+    # return [ c*( math.cos(t)) + a*math.cos(t*15), c*math.sin(t*15), c*math.sin(t) ]
 
 
 class Window(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.title = 'PyQt5 simple window - pythonspot.com'
+        self.title = 'Graphy'
         self.left = 10
         self.top = 10
         self.width = 810
@@ -82,8 +87,8 @@ class Window(QWidget):
 
         layout.setColumnStretch(0, 10)
         layout.setRowStretch(0, 10)
-        layout.addWidget(self.glWidget, 0,0)
-        layout.addWidget(self.textbox, 1,0)
+        layout.addWidget(self.glWidget, 0, 0)
+        layout.addWidget(self.textbox, 1, 0)
         layout.addWidget(self.addEqButton, 1, 1)
         layout.addWidget(self.functionListW, 0, 1)
 
@@ -95,16 +100,16 @@ class Window(QWidget):
     def addElementToList(self):
         i = self.glWidget.getElementsSize() - 1
         item = QListWidgetItem(self.functionListW)
-        customWidget = functionListQT.FunctionListQT(self.glWidget.getFunction(i).getFunction(), self, i, item,self.deleteFunction)
+        customWidget = functionListQT.FunctionListQT(self.glWidget.getFunction(i).getFunction(), self, i, item,
+                                                     self.deleteFunction)
         item.setSizeHint(customWidget.sizeHint())
         self.functionListW.addItem(item)
         self.functionListW.setItemWidget(item, customWidget)
 
     def deleteFunction(self, i, item):
-        print("sup")
         self.functionListW.takeItem(self.functionListW.row(item))
-        #self.functionListW.removeItemWidget( item )
-        #widget.deleteLater()
+        # self.functionListW.removeItemWidget( item )
+        # widget.deleteLater()
         self.glWidget.removeFunction(i)
         pass
 
@@ -119,14 +124,12 @@ class Window(QWidget):
         if (len(fullExp) > 1):
             if fullExp[1].replace(" ", "") == "Parametric":
                 type = Function.Types.PARAMETRIC
-            elif  fullExp[1].replace(" ", "") == "VField":
+            elif fullExp[1].replace(" ", "") == "VField":
                 type = Function.Types.VECTOR
         else:
             type = Function.Types.MULT_FUNC
 
         return (exp, type)
-
-
 
     @pyqtSlot()
     def onAddClick(self):
@@ -137,7 +140,6 @@ class Window(QWidget):
             self.addElementToList()
         finally:
             self.textbox.setText("")
-
 
 
 class openGL(QtOpenGL.QGLWidget):
@@ -153,7 +155,7 @@ class openGL(QtOpenGL.QGLWidget):
         fmt.setProfile(QtOpenGL.QGLFormat.CoreProfile)
         fmt.setSampleBuffers(True)
 
-        super().__init__(fmt,parent)
+        super().__init__(fmt, parent)
 
         timer = QTimer(parent)
         timer.timeout.connect(self.updateGL)
@@ -165,14 +167,16 @@ class openGL(QtOpenGL.QGLWidget):
 
         self.dx = 0
         self.dy = 0
+        self.ds = 1
         self.x = 0
         self.y = 0
+        self.draw = True
 
         self.camera = Camera()
 
         self.isClick = False
 
-    def removeFunction(self,i):
+    def removeFunction(self, i):
         self.drawingElements.pop(i)
 
     def getElementsSize(self):
@@ -182,11 +186,11 @@ class openGL(QtOpenGL.QGLWidget):
         return self.drawingElements[i]
 
     def addFunction(self, strf, type):
-        if type==Function.Types.MULT_FUNC:
+        if type == Function.Types.MULT_FUNC:
             self.drawingElements.append(MultiFunction.MultiFunction(strf))
-        elif type==Function.Types.PARAMETRIC:
-            self.drawingElements.append(Parametric.Parametric(strf, (0,2*np.pi), 200))
-        elif type==Function.Types.VECTOR:
+        elif type == Function.Types.PARAMETRIC:
+            self.drawingElements.append(Parametric.Parametric(strf, (0, 2 * np.pi), 200))
+        elif type == Function.Types.VECTOR:
             self.drawingElements.append(VectorField.VectorField(strf))
 
     def glEnables(self):
@@ -195,7 +199,6 @@ class openGL(QtOpenGL.QGLWidget):
 
     def initElements(self):
         self.drawingElements.append(Axis.Axis())
-
 
     def cursorClick(self, window, button, action, mods):
         pass
@@ -207,11 +210,14 @@ class openGL(QtOpenGL.QGLWidget):
             elif glfw.RELEASE == action:
                 self.isClick = False"""
 
+    def wheelEvent(self, QWheelEvent):
+        super().wheelEvent(QWheelEvent)
+        self.ds += self.dt * (QWheelEvent.angleDelta().y()/8.0)
 
     def cursor(self, x, y):
 
         if self.isClick:
-            #self.updateGL()
+            # self.updateGL()
             self.dx = self.x - x
             self.dy = self.y - y
 
@@ -232,18 +238,18 @@ class openGL(QtOpenGL.QGLWidget):
         self.cursor(QMouseEvent.x(), QMouseEvent.y())
 
     def paintEvent(self, QPaintEvent):
-        #self.updateGL()
+        # self.updateGL()
         pass
 
     def paintGL(self):
+        t1 = time.time()
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
-
-        t1 = time.time()
-
         self.camera.rotBeta(min(self.dt * self.dx, 0.1))
         self.camera.rotAalpha(min(self.dt * self.dy, 0.1))
+        self.camera.setScale([self.ds, self.ds, self.ds])
+
 
         for e in self.drawingElements:
             e.setV(self.camera.getV())
@@ -251,17 +257,14 @@ class openGL(QtOpenGL.QGLWidget):
 
         self.dt = time.time() - t1
 
-
-
+        self.draw = False
 
 
 if __name__ == "__main__":
-
     app = QApplication(sys.argv)
-    #gl = openGL()
+    # gl = openGL()
     window = Window()
 
-    #gl.Render()
+    # gl.Render()
 
     sys.exit(app.exec_())
-

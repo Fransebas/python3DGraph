@@ -4,48 +4,58 @@ from enum import Enum
 from Drawable import *
 
 from Function import *
+import numpy as np
+
 
 class VectorField(Drawable):
-
     class Types(Enum):
         COLORED = 1
         SIZED = 2
 
-
-    def __init__(self, strf, type = Types.SIZED):
+    def __init__(self, strf, type=Types.SIZED):
         super().__init__()
         self.f = Function(strf, type=Function.Types.VECTOR)
         self.type = type
         self.vectors = []
-        self.xRange = 5
-        self.yRange = 5
-        self.zRange = 5
-        self.scale = 5
+        self.xRange = 7
+        self.yRange = 7
+        self.zRange = 7
+        self.scale = 7
+        self.maxsize = 0
 
-
-        #if self.type == Types.COLORED:
+        # if self.type == Types.COLORED:
         #    raise NotImplementedError
 
         self.__build__()
 
     def __build__(self):
-        scaleX = self.scale/self.xRange
-        scaleY = self.scale/self.yRange
-        scaleZ = self.scale/self.zRange
+        scaleX = self.scale / self.xRange
+        scaleY = self.scale / self.yRange
+        scaleZ = self.scale / self.zRange
+        self.maxsize = -9999
 
-        for i in range(0,self.xRange):
+        vectors = []
+
+        for i in range(0, self.xRange):
             for j in range(0, self.yRange):
                 for k in range(0, self.zRange):
-                    x = scaleX*i - scaleX*self.xRange/2.0
-                    y = scaleY*j - scaleY*self.yRange/2.0
-                    z = scaleZ*k - scaleZ*self.zRange/2.0
-                    end = self.f.eval(x,y,z)
-                    self.vectors.append(Vector(start=[x,y,z], end=end))
+                    x = scaleX * i - scaleX * self.xRange / 2.0
+                    y = scaleY * j - scaleY * self.yRange / 2.0
+                    z = scaleZ * k - scaleZ * self.zRange / 2.0
+                    start = np.array((x, y, z), dtype=np.float32)
+                    end = np.array(self.f.eval(x, y, z), dtype=np.float32)
+                    size = np.linalg.norm(end - start)
+                    vectors.append((start, end, size))
+                    self.maxsize = max(self.maxsize, size)
+
+        for start, end, size in vectors:
+            color = np.array([size / self.maxsize, 0, 1 - size / self.maxsize], dtype=np.float)
+            self.vectors.append(Vector(start=start, end=end, color=color))
 
     def getFunction(self):
         return self.f
 
-    def setXYZ(self,xyz):
+    def setXYZ(self, xyz):
         super().setXYZ(xyz)
         for v in self.vectors:
             v.setXYZ(xyz)
@@ -84,7 +94,6 @@ class VectorField(Drawable):
         super().setGama(c)
         for v in self.vectors:
             v.setGama(c)
-
 
     def rotAalpha(self, a):
         super().rotAalpha(a)
