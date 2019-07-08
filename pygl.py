@@ -119,7 +119,7 @@ class Window(QWidget):
         :param str: str
         :return:
         """
-        fullExp = str.split(",")
+        fullExp = str.split(":")
         exp = fullExp[0]
         if (len(fullExp) > 1):
             if fullExp[1].replace(" ", "") == "Parametric":
@@ -186,12 +186,15 @@ class openGL(QtOpenGL.QGLWidget):
         return self.drawingElements[i]
 
     def addFunction(self, strf, type):
-        if type == Function.Types.MULT_FUNC:
-            self.drawingElements.append(MultiFunction.MultiFunction(strf))
-        elif type == Function.Types.PARAMETRIC:
-            self.drawingElements.append(Parametric.Parametric(strf, (0, 2 * np.pi), 200))
-        elif type == Function.Types.VECTOR:
-            self.drawingElements.append(VectorField.VectorField(strf))
+        try:
+            if type == Function.Types.MULT_FUNC:
+                self.drawingElements.append(MultiFunction.MultiFunction(strf))
+            elif type == Function.Types.PARAMETRIC:
+                self.drawingElements.append(Parametric.Parametric(strf, (0, 2 * np.pi), 200))
+            elif type == Function.Types.VECTOR:
+                self.drawingElements.append(VectorField.VectorField(strf))
+        finally:
+            pass
 
     def glEnables(self):
         glEnable(GL_DEPTH_TEST)
