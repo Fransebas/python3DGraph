@@ -38,5 +38,5 @@ Currently the shaders are only for `#version 330` but I think It will be easy to
 
 
 ![image](https://i.imgur.com/yZOvREQ.png)
-![image](https://i.imgur.com/vDvZCvj.png)
+![image](https://i.imgur.com/RWqbJ6q.png)
 
